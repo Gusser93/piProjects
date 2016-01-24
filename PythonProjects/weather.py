@@ -1,5 +1,6 @@
 from gpiozero import LED
 from pyowm import OWM
+import pyowm
 
 sunny = LED(17)
 rain = LED(18)
@@ -44,9 +45,15 @@ if mainzFc.will_have_sun():
 else:
     #sunny.off()
     print('keine Sonne')
-if (mainzFC.most_hot().get_temperature(unit='celsius') < 7):
+if (mainzFc.most_hot().get_temperature(unit='celsius')['temp'] < 10):
     #cold.on()
     print('Kalt')
 else:
     #cold.off()
     print('nicht Kalt')
+if (mainzFc.most_cold().get_temperature(unit='celsius')['temp'] > 17):
+    #hot.on()
+    print('warm')
+else:
+    #hot.off()
+    print('nicht warm')
